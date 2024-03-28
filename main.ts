@@ -23,7 +23,7 @@ if (pinAnswers.Pin === myPin) {
                 name: "transection",
                 type: "list",
                 message: "Select your transection",
-                choices: ["Cash Withdrawl", "Fast Cash", "Check Balance" , "PIN Change"]
+                choices: ["Cash Withdrawl", "Fast Cash", "Check Balance", "PIN Change"]
             }
         ]
     );
@@ -40,11 +40,12 @@ if (pinAnswers.Pin === myPin) {
                 }
             ]
         );
-        if (withdrawlAnswer.withdrawl <= myBalance){
+        if (withdrawlAnswer.withdrawl <= myBalance) {
             myBalance -= withdrawlAnswer.withdrawl;
 
             console.log(chalk.green(`Withdrawl Successfully!, Your remaining balance is: ${myBalance}`))
         }
+    }
     else if (transectionAnswers.transection === "Fast Cash") {
         let cashAnswer = await inquirer.prompt(
             [
@@ -52,7 +53,7 @@ if (pinAnswers.Pin === myPin) {
                     name: "cash",
                     type: "list",
                     message: "Select the amount to Fast Cash",
-                    choices: ["1000", "2000", "3000", "5000", "8000","9000", "10000"]
+                    choices: ["1000", "2000", "3000", "5000", "8000", "9000", "10000"]
                 }
             ]
         );
@@ -62,36 +63,36 @@ if (pinAnswers.Pin === myPin) {
     else if (transectionAnswers.transection === "Check Balance") {
         console.log(chalk.bold(`Your current balance is: ${myBalance}`));
     }
-}
-if (transectionAnswers.transection === "PIN Change"){
-    let changePinAnswer = await inquirer.prompt(
-        [
-            {
-                name: "changePin",
-                type: "number",
-                message: "Enter the correct current PIN to change it.",
-            }
-        ]
-    );
-    if (changePinAnswer.changePin === myPin){
-        let newPinAnswer = await inquirer.prompt(
+
+    else if (transectionAnswers.transection === "PIN Change") {
+        let changePinAnswer = await inquirer.prompt(
             [
                 {
-                    name: "newPin",
+                    name: "changePin",
                     type: "number",
-                    message: "Enter the new PIN.",
+                    message: "Enter the correct current PIN to change it.",
                 }
             ]
         );
-        myPin = newPinAnswer.newPin;
-        console.log(chalk.green(`The PIN has been changed successfully, Your new PIN is: ${myPin}`));
-    }
-    else{
-        console.log(chalk.red("The PIN you entered is incorrect!"));
+        if (changePinAnswer.changePin === myPin) {
+            let newPinAnswer = await inquirer.prompt(
+                [
+                    {
+                        name: "newPin",
+                        type: "number",
+                        message: "Enter the new PIN.",
+                    }
+                ]
+            );
+            myPin = newPinAnswer.newPin;
+            console.log(chalk.green(`The PIN has been changed successfully, Your new PIN is: ${myPin}`));
+        }
+        else {
+            console.log(chalk.red("The PIN you entered is incorrect!"));
+        }
     }
 }
 
-}
 
 else {
     console.log(chalk.red("Invalid Pin"));

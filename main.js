@@ -30,23 +30,23 @@ if (pinAnswers.Pin === myPin) {
             myBalance -= withdrawlAnswer.withdrawl;
             console.log(chalk.green(`Withdrawl Successfully!, Your remaining balance is: ${myBalance}`));
         }
-        else if (transectionAnswers.transection === "Fast Cash") {
-            let cashAnswer = await inquirer.prompt([
-                {
-                    name: "cash",
-                    type: "list",
-                    message: "Select the amount to Fast Cash",
-                    choices: ["1000", "2000", "3000", "5000", "8000", "9000", "10000"]
-                }
-            ]);
-            myBalance -= cashAnswer.cash;
-            console.log(chalk.green(`The fast cash withdrawl was completed successfully, Your remaining balance is: ${myBalance}`));
-        }
-        else if (transectionAnswers.transection === "Check Balance") {
-            console.log(chalk.bold(`Your current balance is: ${myBalance}`));
-        }
     }
-    if (transectionAnswers.transection === "PIN Change") {
+    else if (transectionAnswers.transection === "Fast Cash") {
+        let cashAnswer = await inquirer.prompt([
+            {
+                name: "cash",
+                type: "list",
+                message: "Select the amount to Fast Cash",
+                choices: ["1000", "2000", "3000", "5000", "8000", "9000", "10000"]
+            }
+        ]);
+        myBalance -= cashAnswer.cash;
+        console.log(chalk.green(`The fast cash withdrawl was completed successfully, Your remaining balance is: ${myBalance}`));
+    }
+    else if (transectionAnswers.transection === "Check Balance") {
+        console.log(chalk.bold(`Your current balance is: ${myBalance}`));
+    }
+    else if (transectionAnswers.transection === "PIN Change") {
         let changePinAnswer = await inquirer.prompt([
             {
                 name: "changePin",

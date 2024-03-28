@@ -1,6 +1,6 @@
 {
   "name": "@arishah/atm_machine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "\"This is cli based atm machine project\"",
   "main": "main.js",
   "type": "module",
